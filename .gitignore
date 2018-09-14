@@ -8,6 +8,13 @@
 
 Carthage/Build
 
+### SwiftPackageManager ###
+Packages
+.build/
+xcuserdata
+DerivedData/
+*.xcodeproj
+
 ### Git ###
 *.orig
 
