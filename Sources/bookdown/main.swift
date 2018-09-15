@@ -17,4 +17,15 @@
     limitations under the License.
 */
 
-print("bookdown")
+import Commander
+
+Group {
+    $0.command(
+        "generate",
+        Flag("single-file", default: false, flag: "s", description: "Generate only a single file"),
+        Argument<String>("filename"),
+        description: "Generate a book"
+    ) { singleFile, filename in
+
+    }
+}.run()
