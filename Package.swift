@@ -8,6 +8,7 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         .package(url: "https://github.com/kylef/Commander.git", from: "0.8.0"),
+        .package(url: "https://github.com/fletcher/MultiMarkdown-6/", from: "6.4.0")
     ],
     targets: [
         // Targets are the basic building blocks of a package. 
@@ -17,7 +18,8 @@ let package = Package(
         .target(
             name: "bookdown",
             dependencies: [
-                "Commander"
+                "Commander",
+                "MultiMarkdown"
             ]),
     ]
 )
