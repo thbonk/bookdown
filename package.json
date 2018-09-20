@@ -1,0 +1,25 @@
+{
+  "name": "bookdown",
+  "version": "0.0.1",
+  "description": "bookdown is a tool for generating larger documents out of a collection of Markdown files.",
+  "main": "build/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thbonk/bookdown.git"
+  },
+  "keywords": [
+    "markdown",
+    "ebook",
+    "book",
+    "generator"
+  ],
+  "author": "Thomas Bonk <thomas@meandmymac.de>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/thbonk/bookdown/issues"
+  },
+  "homepage": "https://github.com/thbonk/bookdown/wiki"
+}
