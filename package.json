@@ -24,8 +24,9 @@
   },
   "homepage": "https://github.com/thbonk/bookdown/wiki",
   "dependencies": {
-    "@microsoft/ts-command-line": "^4.2.2",
     "@types/commonmark": "^0.27.1",
+    "@types/node": "^10.10.1",
+    "clime": "^0.5.9",
     "commonmark": "^0.28.1"
   },
   "devDependencies": {

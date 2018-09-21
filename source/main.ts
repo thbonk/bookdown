@@ -14,9 +14,3 @@
 //  limitations under the License.
 //
 
-import {
-    CommandLine
-} from './CommandLine';
-
-const commandLine: CommandLine = new CommandLine();
-commandLine.execute(process.argv);
