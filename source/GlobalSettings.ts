@@ -14,9 +14,14 @@
 //  limitations under the License.
 //
 
-import {
-    CommandLine
-} from './CommandLine';
+export class GlobalSettings {
+    private static _beVerbose: boolean = false;
 
-const commandLine: CommandLine = new CommandLine();
-commandLine.execute(process.argv);
+    public static get beVerbose(): boolean {
+        return this._beVerbose;
+    }
+
+    public static set beVerbose(value: boolean) {
+        this._beVerbose = value;
+    }
+}

@@ -18,6 +18,13 @@ import {
     CommandLineParser,
     CommandLineFlagParameter
 } from '@microsoft/ts-command-line';
+import {
+    GlobalSettings
+} from './GlobalSettings';
+import {
+    Generate
+} from './Actions/Generate';
+
 
 export class CommandLine extends CommandLineParser {
     private _verbose: CommandLineFlagParameter | undefined = undefined;
@@ -28,7 +35,7 @@ export class CommandLine extends CommandLineParser {
             toolDescription: 'Create documents out of a collection of Markdown files.'
         });
 
-        //this.addAction(new PushAction());
+        this.addAction(new Generate());
     }
 
     protected onDefineParameters(): void { // abstract
@@ -40,8 +47,7 @@ export class CommandLine extends CommandLineParser {
     }
 
     protected onExecute(): Promise < void > { // override
-        //console.log(this._verbose);
-        //BusinessLogic.configureLogger(this._verbose.value);
+        GlobalSettings.beVerbose = this._verbose != undefined && this._verbose.value;
         return super.onExecute();
     }
 }
