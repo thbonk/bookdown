@@ -14,4 +14,13 @@
 //  limitations under the License.
 //
 
-console.log("bookdown");
+import * as Path from 'path';
+import {
+    CLI,
+    Shim
+} from 'clime';
+
+let cli = new CLI('bookdown', Path.join(__dirname, 'commands'));
+let shim = new Shim(cli);
+
+shim.execute(process.argv);
