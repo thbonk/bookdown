@@ -1,3 +1,7 @@
+# Project specific ignores
+
+build/
+
 # Created by https://www.gitignore.io/api/node,linux,macos,windows,webstorm+all,visualstudiocode
 
 ### Linux ###

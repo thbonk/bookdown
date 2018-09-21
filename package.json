@@ -4,6 +4,7 @@
   "description": "bookdown is a tool for generating larger documents out of a collection of Markdown files.",
   "main": "build/main.js",
   "scripts": {
+    "build": "./node_modules/.bin/tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,5 +22,13 @@
   "bugs": {
     "url": "https://github.com/thbonk/bookdown/issues"
   },
-  "homepage": "https://github.com/thbonk/bookdown/wiki"
+  "homepage": "https://github.com/thbonk/bookdown/wiki",
+  "dependencies": {
+    "@microsoft/ts-command-line": "^4.2.2",
+    "@types/commonmark": "^0.27.1",
+    "commonmark": "^0.28.1"
+  },
+  "devDependencies": {
+    "typescript": "^3.0.3"
+  }
 }
