@@ -14,7 +14,6 @@
 //  limitations under the License.
 //
 
-import * as fs from 'fs';
 import {
     Command,
     command,
@@ -22,12 +21,13 @@ import {
     Options,
     option
 } from 'clime';
-import * as CommonMark from 'commonmark';
+import Generator from '../Generator';
+
 
 export class GenerateOptions extends Options {
     @option({
         flag: 'e',
-        description: 'embed images into HTML file',
+        description: 'embed images into output file',
         toggle: true,
         default: false,
         required: false
@@ -35,13 +35,13 @@ export class GenerateOptions extends Options {
     embedImages: boolean = false;
 
     @option({
-        flag: 't',
-        description: 'measure the parsing time',
+        flag: 'v',
+        description: 'be verbose',
         toggle: true,
         default: false,
         required: false
     })
-    measureParsingTime: boolean = false;
+    verbose: boolean = false;
 }
 
 @command({
@@ -55,13 +55,12 @@ export default class extends Command {
         }) filename: string,
         options: GenerateOptions
     ) {
-        let parser = new CommonMark.Parser({
-            smart: true,
-            time: options.measureParsingTime
+        let generator = new Generator({
+            filename: filename,
+            embedImages: options.embedImages,
+            verbose: options.verbose
         });
-        let content = fs.readFileSync(filename, 'utf8').toString()
-        let node = parser.parse(content);
 
-        
+        generator.generate();
     }
 }
