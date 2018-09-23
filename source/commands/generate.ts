@@ -26,13 +26,35 @@ import Generator from '../Generator';
 
 export class GenerateOptions extends Options {
     @option({
-        flag: 'e',
-        description: 'embed images into output file',
+        flag: 's',
+        description: 'Smart parsing: straight quotes will be made curly, -- will be changed to an en dash,'
+                        + ' --- will be changed to an em dash, and ... will be changed to ellipses.',
         toggle: true,
         default: false,
         required: false
     })
-    embedImages: boolean = false;
+    smart: boolean = false;
+
+    @option({
+        flag: 'r',
+        description: 'Raw HTML will not be passed through to HTML output (it will be replaced by comments), '
+                        + 'and potentially unsafe URLs in links and images (those beginning with javascript:, '
+                        + 'vbscript:, file:, and with a few exceptions data:) will be replaced with empty strings.',
+        toggle: true,
+        default: false,
+        required: false
+    })
+    safeExport: boolean = false;
+
+    @option({
+        flag: 'p',
+        description: 'Source position information for block-level elements will be rendered in the '
+                        +'data-sourcepos attribute (for HTML) or the sourcepos attribute (for XML).',
+        toggle: true,
+        default: false,
+        required: false
+    })
+    sourcePos: boolean = false
 
     @option({
         flag: 'v',
@@ -55,12 +77,18 @@ export default class extends Command {
         }) filename: string,
         options: GenerateOptions
     ) {
-        let generator = new Generator({
-            filename: filename,
-            embedImages: options.embedImages,
-            verbose: options.verbose
-        });
+        try {
+            let generator = new Generator({
+                filename: filename,
+                smart: options.smart,
+                safeExport: options.safeExport,
+                sourcePos: options.sourcePos,
+                verbose: options.verbose
+            });
 
-        generator.generate();
+            generator.generate();
+        } catch (ex) {
+            console.error(ex.message);
+        }
     }
 }

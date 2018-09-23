@@ -14,35 +14,95 @@
 //  limitations under the License.
 //
 
-//import * as CommonMark from 'commonmark';
+import * as CommonMark from 'commonmark';
+import {ConsoleLogger} from './ConsoleLogger';
 import * as fs from 'fs';
+import * as Path from 'path';
 
 export interface GeneratorOptions {
     filename: string;
-    embedImages?: boolean;
-    verbose?: boolean;
+    outDir?: string;
+    smart ? : boolean;
+    safeExport ? : boolean;
+    sourcePos ? : boolean;
+    verbose ? : boolean;
 }
 
 export default class Generator {
     private _options: GeneratorOptions;
     private _source: string;
+    private _reader: CommonMark.Parser;
+    private _log: ConsoleLogger;
 
     public constructor(options: GeneratorOptions) {
         this._options = options;
+        this.setDefaultOptionValues();
 
-        if (this._options.embedImages == undefined) {
-            this._options.embedImages = false;
+        this._log = new ConsoleLogger(this._options.verbose!);
+
+        this._log.info(`Reading file ${this._options.filename}...`)
+        this._source = fs.readFileSync(this._options.filename, 'utf8');
+
+        this._reader = new CommonMark.Parser({
+            smart: this._options.smart
+        });
+    }
+
+    public generate() {
+        this._log.info(`Parsing...`)
+        let parsed = this._reader.parse(this._source);
+        let writer = new CommonMark.HtmlRenderer({
+            safe: this._options.safeExport,
+            smart: this._options.smart,
+            sourcepos: this._options.sourcePos
+        });
+
+        this.saveFile(writer.render(parsed));
+    }
+
+    private saveFile(html: string) {
+        let outFilename = Path.parse(this._options.filename).name + ".html";
+
+        this.createOutDir(this._options.outDir!);
+        this._log.info(`Saving...`)
+        fs.writeFileSync(Path.join(this._options.outDir!, outFilename), html);
+    }
+
+    private createOutDir(pathname: string) {
+        if (fs.existsSync(pathname) && fs.statSync(pathname).isFile()) {
+            throw new Error(`>${pathname}< exists and is a file!`);
+        }
+
+        if (!fs.existsSync(pathname)) {
+            this._log.info(`Creating out dir ${pathname}...`)
+            fs.mkdirSync(pathname);
+        } else {
+            this._log.info(`Out dir ${pathname} already exists...`)
+        }
+    }
+
+    private setDefaultOptionValues() {
+        if (this._options.safeExport == undefined) {
+            this._options.safeExport = false;
+        }
+
+        if (this._options.sourcePos == undefined) {
+            this._options.sourcePos = false;
         }
 
         if (this._options.verbose == undefined) {
             this._options.verbose = false;
         }
 
-        this._source = fs.readFileSync(this._options.filename, 'utf8');
-        this._source;
-    }
+        if (this._options.smart == undefined) {
+            this._options.smart = false;
+        }
 
-    public generate() {
+        if (this._options.outDir == undefined) {
+            let inputFilePath = Path.parse(this._options.filename).dir;
 
+            inputFilePath = Path.normalize(inputFilePath);
+            this._options.outDir = Path.join(inputFilePath, "generated");
+        }
     }
 }

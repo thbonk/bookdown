@@ -7,8 +7,14 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Debug",
+            "name": "Debug with testfile/simple.md",
             "program": "${workspaceFolder}/build/main.js",
+            "args": [
+                "generate",
+                "${workspaceFolder}/testfiles/simple.md",
+                "-v",
+                "-p"
+            ],
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ]
