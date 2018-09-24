@@ -48,7 +48,7 @@ export default class Generator {
         });
     }
 
-    public generate() {
+    public convert() {
         this._log.info(`Parsing...`)
         let parsed = this._reader.parse(this._source);
         let writer = new CommonMark.HtmlRenderer({

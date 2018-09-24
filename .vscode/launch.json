@@ -10,8 +10,23 @@
             "name": "Debug with testfile/simple.md",
             "program": "${workspaceFolder}/build/main.js",
             "args": [
-                "generate",
+                "convert",
                 "${workspaceFolder}/testfiles/simple.md",
+                "-v",
+                "-p"
+            ],
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debug with testfile/complex.md",
+            "program": "${workspaceFolder}/build/main.js",
+            "args": [
+                "convert",
+                "${workspaceFolder}/testfiles/complex.md",
                 "-v",
                 "-p"
             ],

@@ -67,7 +67,7 @@ export class GenerateOptions extends Options {
 }
 
 @command({
-    description: 'Generate formatted files from the input file.',
+    description: 'Convert a Markdown formatted file to HTML.',
 })
 export default class extends Command {
     execute(
@@ -86,7 +86,7 @@ export default class extends Command {
                 verbose: options.verbose
             });
 
-            generator.generate();
+            generator.convert();
         } catch (ex) {
             console.error(ex.message);
         }
