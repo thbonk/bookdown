@@ -1,3 +1,17 @@
 {
-    
+    "metadata": {
+        "identifier": "6f2e78a1-c4f3-4895-b58b-347f92fb2d14",
+        "language": "de",
+        "title": "This is my title",
+        "description": "Lorem ipsum sit doloret esta lauder cum quad sit bonus",
+        "authors": [
+            {
+                "name": "Thomas Bonk",
+                "sortBy": "Bonk, Thomas"
+            }
+        ]
+    },
+    "options": {
+
+    }
 }
